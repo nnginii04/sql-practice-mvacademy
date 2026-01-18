@@ -297,3 +297,43 @@ FROM manager mg
               ON st.student_code = ex.student_code
 WHERE mg.name = 'managerA'
 ORDER BY st.student_code, ex.exam_seq;
+
+
+
+
+
+-- 문제 5) STUDENT 삭제 시 EXAM, MANAGER도 함께 삭제되도록 FK를 CASCADE로 변경
+
+-- 1) EXAM: 기존 FK 제거 후 CASCADE로 다시 추가
+ALTER TABLE exam
+    DROP FOREIGN KEY exam_fk_student_code;
+
+ALTER TABLE exam
+    ADD CONSTRAINT exam_fk_student_code
+        FOREIGN KEY (student_code)
+            REFERENCES student(student_code)
+            ON DELETE CASCADE;
+
+-- 2) MANAGER: 기존 FK 제거 후 CASCADE로 다시 추가
+ALTER TABLE manager
+    DROP FOREIGN KEY manager_fk_student_code;
+
+ALTER TABLE manager
+    ADD CONSTRAINT manager_fk_student_code
+        FOREIGN KEY (student_code)
+            REFERENCES student(student_code)
+            ON DELETE CASCADE;
+
+
+SELECT * FROM student WHERE student_code = 's1';
+SELECT * FROM exam WHERE student_code = 's1';
+SELECT * FROM manager WHERE student_code = 's1';
+
+
+
+DELETE FROM student WHERE student_code = 's1';
+
+
+SELECT * FROM student WHERE student_code = 's1';
+SELECT * FROM exam WHERE student_code = 's1';
+SELECT * FROM manager WHERE student_code = 's1';
