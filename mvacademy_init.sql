@@ -246,3 +246,9 @@ CREATE TABLE manager (
 
 DESC manager;
 SHOW CREATE TABLE manager;
+
+-- 문제 2) ALTER, MODIFY를 이용해 MANAGER 테이블의 id 컬럼에 AUTO_INCREMENT 적용
+ALTER TABLE manager
+    MODIFY id BIGINT AUTO_INCREMENT;
+
+SHOW CREATE TABLE manager;
