@@ -233,3 +233,16 @@ from student s
 select s.name, s.major_code, m.major_name
 from student s, major m
 where s.major_code = m.major_code;
+
+-- 문제 1) MANAGER 테이블 생성
+CREATE TABLE manager (
+                         id BIGINT PRIMARY KEY,
+                         name VARCHAR(100) NOT NULL,
+                         student_code VARCHAR(100) NOT NULL,
+                         CONSTRAINT manager_fk_student_code
+                             FOREIGN KEY (student_code)
+                                 REFERENCES student(student_code)
+);
+
+DESC manager;
+SHOW CREATE TABLE manager;
