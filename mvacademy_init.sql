@@ -282,3 +282,18 @@ FROM manager mg
          JOIN student st
               ON mg.student_code = st.student_code
 ORDER BY mg.name, mg.id;
+
+
+-- 문제 4) managerA가 관리하는 수강생들의 이름과 시험 주차별 성적 조회
+SELECT
+    st.name      AS student_name,
+    ex.exam_seq  AS exam_week,
+    ex.score     AS score,
+    ex.result    AS result
+FROM manager mg
+         JOIN student st
+              ON mg.student_code = st.student_code
+         JOIN exam ex
+              ON st.student_code = ex.student_code
+WHERE mg.name = 'managerA'
+ORDER BY st.student_code, ex.exam_seq;
