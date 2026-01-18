@@ -252,3 +252,33 @@ ALTER TABLE manager
     MODIFY id BIGINT AUTO_INCREMENT;
 
 SHOW CREATE TABLE manager;
+
+
+
+SELECT * FROM manager;
+
+-- 문제 3) AUTO_INCREMENT를 활용해 MANAGER 데이터 추가
+INSERT INTO manager (name, student_code)
+VALUES
+    ('managerA', 's1'),
+    ('managerA', 's2'),
+    ('managerA', 's3'),
+    ('managerA', 's4'),
+    ('managerA', 's5'),
+    ('managerB', 's6'),
+    ('managerB', 's7'),
+    ('managerB', 's8'),
+    ('managerB', 's9');
+
+
+SELECT * FROM manager ORDER BY id;
+
+SELECT
+    mg.id,
+    mg.name AS manager_name,
+    st.student_code,
+    st.name AS student_name
+FROM manager mg
+         JOIN student st
+              ON mg.student_code = st.student_code
+ORDER BY mg.name, mg.id;
